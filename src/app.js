@@ -8,10 +8,10 @@ function updateWeather(response) {
   weatherDescription.innerHTML = response.data.condition.description;
 
   let humidity = document.querySelector(".humidity");
-  humidity.innerHTML = `response.data.temperature.humidity`;
+  humidity.innerHTML = response.data.temperature.humidity + "%";
 
   let wind = document.querySelector(".wind");
-  wind.innerHTML = `response.data.wind`;
+  wind.innerHTML = response.data.wind;
 }
 
 function searchCity(city) {
