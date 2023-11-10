@@ -74,7 +74,8 @@ h1 {
   font-size: 100px;
   font-weight: 600;
 }
-p span {
+.humidity,
+.wind {
   color: #ff5d00;
   font-weight: bold;
 }
