@@ -49,8 +49,27 @@ main {
 h1 {
   font-size: 40px;
   line-height: 50px;
-  margin: 10px 0px;
+  margin: 10px 0px 0px 0px;
 }
+h2 {
+  font-size: 14px;
+  margin-top: 0px;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.city-country {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+}
+
+#country {
+  margin: 0;
+  position: relative;
+  bottom: 5px;
+}
+
 .weather-app-details {
   display: flex;
   justify-content: space-between;
