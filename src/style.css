@@ -68,6 +68,11 @@ h2 {
   margin: 0;
   position: relative;
   bottom: 5px;
+  font-size: 14px;
+}
+
+p {
+  font-size: 14px;
 }
 
 .weather-app-details {
@@ -107,4 +112,18 @@ footer {
 
 a {
   color: #00a2ff;
+}
+
+#video-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -1;
+  filter: blur(7px);
+  opacity: 0.6;
 }

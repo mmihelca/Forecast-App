@@ -53,3 +53,6 @@ let days = [
 let day = days[now.getDay()];
 let dayAndTime = document.querySelector(".day-hour");
 dayAndTime.innerHTML = `${day} ${hour}:${minutes}`;
+
+let video = document.querySelector("#video-bg");
+video.playbackRate = 0.5;
