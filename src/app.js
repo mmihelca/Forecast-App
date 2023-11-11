@@ -59,3 +59,31 @@ searchCity("gothenburg");
 
 let video = document.querySelector("#video-bg");
 video.playbackRate = 0.5;
+
+function displayForecast() {
+  forecast.innerHTML = "";
+
+  let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+
+  days.forEach(function (day) {
+    forecast.innerHTML =
+      forecast.innerHTML +
+      `<div class="forecast-one">
+          <span class="forecast-day">${day}</span>
+          <br />
+          <img
+            src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/few-clouds-day.png"
+          />
+          <br />
+          <div class="forecast-min-and-max-temperature">
+            <span class="weather-forecast-temperature-max">18°C</span>
+            <span class="weather-forecast-temperature-min">12°C</span>
+          </div>
+        </div>
+    `;
+  });
+}
+
+let forecast = document.querySelector("#forecast");
+
+displayForecast();
