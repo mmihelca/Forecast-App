@@ -35,8 +35,9 @@ function updateWeather(response) {
   dayAndTime.innerHTML = `${day} ${hour}:${minutes}`;
 
   let weatherIcon = document.querySelector(".weather-icon");
-  weatherIcon.innerHTML = `<img src="${response.data.condition.icon_url}"
-                class="weather-icon"/>`;
+  weatherIcon.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-icon"/>`;
+
+  displayForecast(response.data.city);
 }
 
 function searchCity(city) {
@@ -55,12 +56,18 @@ function handleSearch(event) {
 let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearch);
 
-searchCity("gothenburg");
-
 let video = document.querySelector("#video-bg");
 video.playbackRate = 0.5;
 
-function displayForecast() {
+function getForecast(city) {
+  let apiKey = "35ee71bff3b1ft217b0aao934d002bd5";
+  let apiURL = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+  axios.get(apiURL).then(displayForecast);
+  console.log(apiURL);
+}
+
+function displayForecast(response) {
+  console.log(response.data);
   forecast.innerHTML = "";
 
   let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
@@ -69,21 +76,21 @@ function displayForecast() {
     forecast.innerHTML =
       forecast.innerHTML +
       `<div class="forecast-one">
-          <span class="forecast-day">${day}</span>
-          <br />
-          <img
-            src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/few-clouds-day.png"
-          />
-          <br />
-          <div class="forecast-min-and-max-temperature">
-            <span class="weather-forecast-temperature-max">18°C</span>
-            <span class="weather-forecast-temperature-min">12°C</span>
-          </div>
-        </div>
+    <span class="forecast-day">${day}</span>
+    <br />
+    <img
+    src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/few-clouds-day.png"
+    />
+    <br />
+    <div class="forecast-min-and-max-temperature">
+    <span class="weather-forecast-temperature-max">18°C</span>
+    <span class="weather-forecast-temperature-min">12°C</span>
+    </div>
+    </div>
     `;
   });
 }
 
 let forecast = document.querySelector("#forecast");
 
-displayForecast();
+searchCity("gothenburg");
