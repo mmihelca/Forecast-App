@@ -12,13 +12,32 @@ function updateWeather(response) {
   humidity.innerHTML = response.data.temperature.humidity + "%";
 
   let wind = document.querySelector(".wind");
-  wind.innerHTML = response.data.wind.speed + " km/h";
-  console.log(response.data);
+  wind.innerHTML = response.data.wind.speed + "km/h";
+
+  let now = new Date(response.data.time * 1000);
+  let hour = now.getHours();
+  let minutes = now.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  let day = days[now.getDay()];
+  let dayAndTime = document.querySelector(".day-hour");
+  dayAndTime.innerHTML = `${day} ${hour}:${minutes}`;
 }
 
 function searchCity(city) {
   let apiKey = "35ee71bff3b1ft217b0aao934d002bd5";
-  let apiURL = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
+  let apiURL = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
   axios.get(apiURL).then(updateWeather);
   console.log(apiURL);
 }
@@ -33,26 +52,6 @@ let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearch);
 
 searchCity("gothenburg");
-
-let now = new Date();
-let hour = now.getHours();
-let minutes = now.getMinutes();
-if (minutes < 10) {
-  minutes = `0${minutes}`;
-}
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-
-let day = days[now.getDay()];
-let dayAndTime = document.querySelector(".day-hour");
-dayAndTime.innerHTML = `${day} ${hour}:${minutes}`;
 
 let video = document.querySelector("#video-bg");
 video.playbackRate = 0.5;
