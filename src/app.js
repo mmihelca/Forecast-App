@@ -33,6 +33,10 @@ function updateWeather(response) {
   let day = days[now.getDay()];
   let dayAndTime = document.querySelector(".day-hour");
   dayAndTime.innerHTML = `${day} ${hour}:${minutes}`;
+
+  let weatherIcon = document.querySelector(".weather-icon");
+  weatherIcon.innerHTML = `<img src="${response.data.condition.icon_url}"
+                class="weather-icon"/>`;
 }
 
 function searchCity(city) {
