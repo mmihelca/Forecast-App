@@ -37,14 +37,13 @@ function updateWeather(response) {
   let weatherIcon = document.querySelector(".weather-icon");
   weatherIcon.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-icon"/>`;
 
-  displayForecast(response.data.city);
+  getForecast(response.data.city);
 }
 
 function searchCity(city) {
   let apiKey = "35ee71bff3b1ft217b0aao934d002bd5";
   let apiURL = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
   axios.get(apiURL).then(updateWeather);
-  console.log(apiURL);
 }
 
 function handleSearch(event) {
