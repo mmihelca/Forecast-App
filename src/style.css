@@ -5,6 +5,7 @@ body {
     rgb(102, 188, 239) 100%
   );
   font-family: "Poppins", sans-serif;
+  overflow: hidden;
 }
 .weather-app {
   background-color: white;
