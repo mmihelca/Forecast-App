@@ -35,8 +35,9 @@ function updateWeather(response) {
   dayAndTime.innerHTML = `${day} ${hour}:${minutes}`;
 
   let weatherIcon = document.querySelector(".weather-icon");
-  weatherIcon.innerHTML = `<img src="${response.data.condition.icon_url}"
-                class="weather-icon"/>`;
+  weatherIcon.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-icon"/>`;
+
+  getForecast(response.data.city);
 }
 
 function searchCity(city) {
@@ -55,7 +56,49 @@ function handleSearch(event) {
 let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearch);
 
-searchCity("gothenburg");
-
 let video = document.querySelector("#video-bg");
 video.playbackRate = 0.5;
+
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[date.getDay()];
+}
+
+function getForecast(city) {
+  let apiKey = "35ee71bff3b1ft217b0aao934d002bd5";
+  let apiURL = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+  axios.get(apiURL).then(displayForecast);
+}
+
+function displayForecast(response) {
+  forecast.innerHTML = "";
+
+  response.data.daily.forEach(function (day, index) {
+    if (index < 5) {
+      forecast.innerHTML =
+        forecast.innerHTML +
+        `<div class="forecast-one">
+    <span class="forecast-day">${formatDay(day.time)}</span>
+    <br />
+    <img
+    src="${day.condition.icon_url}"
+    />
+    <br />
+    <div class="forecast-min-and-max-temperature">
+    <span class="weather-forecast-temperature-max">${Math.round(
+      day.temperature.maximum
+    )}°C</span>
+    <span class="weather-forecast-temperature-min">${Math.round(
+      day.temperature.minimum
+    )}°C</span>
+    </div>
+    </div>
+    `;
+    }
+  });
+}
+
+let forecast = document.querySelector("#forecast");
+
+searchCity("gothenburg");
